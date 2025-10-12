@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const mongoose = require("mongoose");
+const connectDb = require("../db/connect");
 const Product = require("../models/product");
 const products = require("../products.json");
 
@@ -8,8 +8,7 @@ const products = require("../products.json");
 (async () => {
   try {
     // connect db
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("Successful DB Connection!");
+    connectDb(process.env.MONGO_URI);
     // clear product collection
     await Product.deleteMany();
     console.log("Product model documents deleted!");
