@@ -1,6 +1,7 @@
 require("dotenv").config();
 require("express-async-errors");
 
+const cors = require("cors");
 const express = require("express");
 const connectDb = require("./db/connect");
 const productRouter = require("./routes/products");
@@ -11,7 +12,17 @@ const ErrorHanler = require("./middleware/errorHandler");
 const app = express();
 app.use(express.json());
 
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET"],
+  })
+);
+
 // routes
+app.use("/", async (req, res) =>
+  res.send('<h1>GET Products</h1><a href="/api/v1/products">Here</a>')
+);
 app.use("/api/v1/products", productRouter);
 
 // middlewares
