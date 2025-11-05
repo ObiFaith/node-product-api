@@ -20,7 +20,7 @@ app.use(
 );
 
 // routes
-app.use("/", async (req, res) =>
+app.get("/", async (req, res) =>
   res.send('<h1>GET Products</h1><a href="/api/v1/products">Here</a>')
 );
 app.use("/api/v1/products", productRouter);
